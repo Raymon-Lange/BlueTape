@@ -12,8 +12,11 @@ class Level():
         floor = [Block(i * block_size, self.height - block_size, block_size)
              for i in range(-self.width // block_size, (self.width * 2) // block_size)]
         
+        floor.append(Block(0, self.height - block_size * 2, block_size))
+        floor.append(Block(block_size * 3, self.height - block_size * 4, block_size))
+        
         return floor
 
-    def draw(self, screen):
+    def draw(self, screen, offsetX ):
         for block in self.LevelObjects:
-            block.draw(screen,0)
+            block.draw(screen,offsetX)

@@ -48,8 +48,8 @@ class Player(pygame.sprite.Sprite):
         self.fallCount += 1
         self.updateSprite()
 
-    def draw(self, screen):
-        screen.blit(self.sprite, (self.rect.x, self.rect.y))
+    def draw(self, screen, offset_x):
+        screen.blit(self.sprite, (self.rect.x - offset_x, self.rect.y))
 
     def loadSprite(self,dir1, dir2, width, height, direction = False):
         self.sprites.loadSpriteSheet(dir1, dir2, width, height, direction)

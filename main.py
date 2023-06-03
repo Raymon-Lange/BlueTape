@@ -19,6 +19,8 @@ screen = pygame.display.set_mode((WIDTH, HEIGHT))
 
 def main(screen):
     run = True
+    offset_x = 0
+    scroll_area_width = 200
 
     #STEP: INIT Game Data
     game = Game()
@@ -27,6 +29,7 @@ def main(screen):
 
     player = Player(100,100,50,50)
     player.loadSprite("MainCharacters", "NinjaFrog", 32, 32, True)
+    player.loop(FPS)
 
     level = Level(HEIGHT, WIDTH)
     level.loadLevel()
@@ -34,9 +37,6 @@ def main(screen):
     while run:
         clock.tick(FPS)
 
-        #STEP: stop x vel everyone
-        player.x_vel = 0
-    
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False #Gets up out of the loop
@@ -45,12 +45,20 @@ def main(screen):
                 if event.key == pygame.K_SPACE and player.jumpCount < 2:
                     player.jump()
 
+
+        
+        #STEP: stop x vel because the keys press will move them forward otherwise they will never stop
+        player.x_vel = 0
         keys = pygame.key.get_pressed()
 
         if keys[pygame.K_a]:
-            player.moveLeft(PLAYER_VELOCITY)
+            hitLeft = game.collide(player, level.LevelObjects, -PLAYER_VELOCITY * 2)
+            if not hitLeft:
+                player.moveLeft(PLAYER_VELOCITY)
         if keys[pygame.K_d]:
-            player.moveRight(PLAYER_VELOCITY)
+            hitRight = game.collide(player, level.LevelObjects, PLAYER_VELOCITY * 2)
+            if not hitRight:
+                player.moveRight(PLAYER_VELOCITY)
 
 
         #STEP: Update Pos
@@ -60,10 +68,15 @@ def main(screen):
         #STEP: Draw Games
         game.draw(screen)
 
-        level.draw(screen)
+        level.draw(screen, offset_x)
 
-        player.draw(screen)
+        player.draw(screen,offset_x)
         pygame.display.update()
+
+        if ((player.rect.right - offset_x >= WIDTH - scroll_area_width) and player.x_vel > 0) or (
+                (player.rect.left - offset_x <= scroll_area_width) and player.x_vel < 0):
+            offset_x += player.x_vel
+
 
     # STEP:Clear up 
     pygame.quit()

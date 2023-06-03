@@ -36,9 +36,26 @@ class Game:
                     player.landed()
                 elif dy < 0:
                     player.rect.top = obj.rect.bottom
-                    player.hit_head()
+                    player.hitHead()
 
             collided_objects.append(obj)
         return collided_objects
+    
+    def collide(self, player, objects, dx):
+        #STEP: Moving the playforward in the fucture by currect vel
+        player.move(dx, 0)
+        player.update()
+        collided_object = None
+
+        #STEP: Check if we collide
+        for obj in objects:
+            if pygame.sprite.collide_mask(player, obj):
+                collided_object = obj
+                break
+
+        #STEP: Move the player back. 
+        player.move(-dx, 0)
+        player.update()
+        return collided_object
 
 
