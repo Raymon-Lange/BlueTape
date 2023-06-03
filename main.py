@@ -3,6 +3,7 @@ import pygame
 from os import listdir
 from os.path import isfile, join
 from game import Game
+from level import Level
 from player import Player
 
 pygame.init()
@@ -11,8 +12,8 @@ pygame.display.set_caption("BlueTape")
 
 BG_COLOR = (255,255,255)
 WIDTH, HEIGHT = 800, 600
-FPS = 60
-PLAYER_VELOCITY = 5
+FPS = 80
+PLAYER_VELOCITY = 4
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 
@@ -25,6 +26,10 @@ def main(screen):
     game.height = HEIGHT
 
     player = Player(100,100,50,50)
+    player.loadSprite("MainCharacters", "NinjaFrog", 32, 32, True)
+
+    level = Level(HEIGHT, WIDTH)
+    level.loadLevel()
 
     while run:
         clock.tick(FPS)
@@ -36,6 +41,10 @@ def main(screen):
             if event.type == pygame.QUIT:
                 run = False #Gets up out of the loop
 
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE and player.jumpCount < 2:
+                    player.jump()
+
         keys = pygame.key.get_pressed()
 
         if keys[pygame.K_a]:
@@ -44,13 +53,15 @@ def main(screen):
             player.moveRight(PLAYER_VELOCITY)
 
 
-
         #STEP: Update Pos
         player.loop(FPS)
-
+        game.handleVerticalCollision(player, level.LevelObjects, player.y_vel)
 
         #STEP: Draw Games
         game.draw(screen)
+
+        level.draw(screen)
+
         player.draw(screen)
         pygame.display.update()
 

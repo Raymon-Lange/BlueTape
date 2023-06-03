@@ -6,8 +6,8 @@ from os.path import isfile, join
 class Game:
     def __init__(self):
         self.gameOver = False
-        self.width = 800
-        self.height = 600
+        self.width = 0
+        self.height = 0
 
     def getBackground(self, name):
         image = pygame.image.load(join("assets", "Background", name))
@@ -25,5 +25,20 @@ class Game:
 
         for tile in background:
             screen.blit(image, tile)
+
+
+    def handleVerticalCollision(self, player, objects, dy):
+        collided_objects = []
+        for obj in objects:
+            if pygame.sprite.collide_mask(player, obj):
+                if dy > 0:
+                    player.rect.bottom = obj.rect.top
+                    player.landed()
+                elif dy < 0:
+                    player.rect.top = obj.rect.bottom
+                    player.hit_head()
+
+            collided_objects.append(obj)
+        return collided_objects
 
 
