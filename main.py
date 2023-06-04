@@ -44,8 +44,6 @@ def main(screen):
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE and player.jumpCount < 2:
                     player.jump()
-
-
         
         #STEP: stop x vel because the keys press will move them forward otherwise they will never stop
         player.x_vel = 0

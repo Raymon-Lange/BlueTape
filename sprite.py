@@ -23,8 +23,6 @@ class Sprite():
                 rect = pygame.Rect(i * width, 0, width, height)
                 surface.blit(spriteSheet,(0,0), rect)
                 sprites.append(pygame.transform.scale2x(surface))
-
-            print(image, len(sprites))
         
             if direction:
                 self.allSprites[image.replace(".png", "") + "_right"] = sprites
