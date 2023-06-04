@@ -17,6 +17,8 @@ class Player(pygame.sprite.Sprite):
         self.fallCount = 0 #how long the player have been falling
         self.sprites = Sprite()
         self.jumpCount = 0
+        self.hit = False
+        self.hitCount = 0
 
     def move(self, dx, dy):
         self.rect.x += dx
@@ -45,6 +47,12 @@ class Player(pygame.sprite.Sprite):
         self.y_vel += min(1, self.fallCount /fps) * self.GRAVITY
         self.move(self.x_vel, self.y_vel)
 
+        if self.hit:
+            self.hitCount += 1
+        if self.hitCount > fps * 2:
+            self.hit = False
+            self.hitCount = 0
+
         self.fallCount += 1
         self.updateSprite()
 
@@ -56,11 +64,9 @@ class Player(pygame.sprite.Sprite):
 
     def updateSprite(self):
         spriteSheet = "idle"
-        if self.x_vel != 0:
-            spriteSheet = "run"
-        
-        spriteSheet = "idle"
-        if self.y_vel < 0:
+        if self.hit:
+            spriteSheet = "hit"
+        elif self.y_vel < 0:
             if self.jumpCount == 1:
                 spriteSheet = "jump"
             elif self.jumpCount == 2:
@@ -90,4 +96,5 @@ class Player(pygame.sprite.Sprite):
         self.count = 0
         self.y_vel *= -1
 
-
+    def takeDamage(self):
+        self.hit = True

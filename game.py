@@ -38,7 +38,8 @@ class Game:
                     player.rect.top = obj.rect.bottom
                     player.hitHead()
 
-            collided_objects.append(obj)
+                collided_objects.append(obj)
+
         return collided_objects
     
     def collide(self, player, objects, dx):

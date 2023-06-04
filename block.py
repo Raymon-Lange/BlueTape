@@ -8,18 +8,20 @@ BLOCKS = {"Grass": pygame.Rect(96, 0, 96, 96),
 
 class Block(Object):
     def __init__(self, xPos, yPos, width, height , name):
-        super().__init__(xPos, yPos, width, height, None)
+        super().__init__(xPos, yPos, width, height, name)
         block = self.getBlock(width, height,name)
         self.image.blit(block, (0, 0))
         self.mask = pygame.mask.from_surface(self.image)
 
     def getBlock(self, width, height, name):
         path = join("assets", "Terrain", "Terrain.png")
-        image = pygame.image.load(path).convert_alpha()
-        surface = pygame.Surface((width, height), pygame.SRCALPHA, 32)
-        rect = BLOCKS[name]
-        surface.blit(image, (0, 0), rect)
-        return pygame.transform.scale2x(surface)
+        return self.getSurface(width, height, path)
+
+        #image = pygame.image.load(path).convert_alpha()
+        #surface = pygame.Surface((width, height), pygame.SRCALPHA, 32)
+        #rect = BLOCKS[name]
+        #surface.blit(image, (0, 0), rect)
+        #return pygame.transform.scale2x(surface)
 
     
 

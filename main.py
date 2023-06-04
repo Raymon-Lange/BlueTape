@@ -27,12 +27,14 @@ def main(screen):
     game.width = WIDTH
     game.height = HEIGHT
 
-    player = Player(100,100,50,50)
+    player = Player(50,50,50,50)
     player.loadSprite("MainCharacters", "NinjaFrog", 32, 32, True)
     player.loop(FPS)
 
     level = Level(HEIGHT, WIDTH)
     level.loadLevel()
+
+
 
     while run:
         clock.tick(FPS)
@@ -50,18 +52,25 @@ def main(screen):
         keys = pygame.key.get_pressed()
 
         if keys[pygame.K_a]:
-            hitLeft = game.collide(player, level.LevelObjects, -PLAYER_VELOCITY * 2)
+            hitLeft = game.collide(player, level.levelObjects, -PLAYER_VELOCITY * 2)
             if not hitLeft:
                 player.moveLeft(PLAYER_VELOCITY)
         if keys[pygame.K_d]:
-            hitRight = game.collide(player, level.LevelObjects, PLAYER_VELOCITY * 2)
+            hitRight = game.collide(player, level.levelObjects, PLAYER_VELOCITY * 2)
             if not hitRight:
                 player.moveRight(PLAYER_VELOCITY)
 
 
         #STEP: Update Pos
         player.loop(FPS)
-        game.handleVerticalCollision(player, level.LevelObjects, player.y_vel)
+        level.loop()
+        game.handleVerticalCollision(player, level.levelObjects, player.y_vel)
+        objs = game.handleVerticalCollision(player, level.obsticals, player.y_vel)
+
+        for obj in objs:
+            if obj and obj.name == "fire":
+                player.takeDamage()
+
 
         #STEP: Draw Games
         game.draw(screen)
@@ -79,7 +88,7 @@ def main(screen):
     # STEP:Clear up 
     pygame.quit()
     sys.exit()
-
+3
 
 if __name__ == "__main__":
     main(screen)
