@@ -3,7 +3,8 @@ from object import Object
 from os.path import join
 
 BLOCKS = {"Grass": pygame.Rect(96, 0, 96, 96),
-           "BrownBar": pygame.Rect(190, 0, 100, 32)}
+           "BrownBar": pygame.Rect(190, 0, 100, 32),
+           "BrownSmallBox": pygame.Rect(190, 16, 36, 32)}
 
 class Block(Object):
     def __init__(self, xPos, yPos, width, height , name):
