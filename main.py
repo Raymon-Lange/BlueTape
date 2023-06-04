@@ -11,7 +11,7 @@ clock = pygame.time.Clock()
 pygame.display.set_caption("BlueTape")
 
 BG_COLOR = (255,255,255)
-WIDTH, HEIGHT = 800, 600
+WIDTH, HEIGHT = 800, 700
 FPS = 80
 PLAYER_VELOCITY = 4
 
@@ -69,6 +69,8 @@ def main(screen):
 
         for obj in objs:
             if obj and obj.name == "fire":
+                player.takeDamage()
+            if obj and obj.name == "spike":
                 player.takeDamage()
 
 

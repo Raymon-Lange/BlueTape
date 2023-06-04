@@ -33,3 +33,18 @@ class Fire(Object):
 
         if self.animation_count // self.ANIMATION_DELAY > len(sprites):
             self.animation_count = 0
+
+
+class Spike(Object):
+    def __init__(self, x, y, width, height, name=None):
+        super().__init__(x, y, width, height, name)
+        block = self.getBlock(width, height,name)
+        self.image.blit(block, (0, 0))
+        self.mask = pygame.mask.from_surface(self.image)
+
+    def getBlock(self, width, height, name):
+        path = join("assets", "Traps\Spikes", "idle.png")
+        return self.getSurface(width, height, path)
+    
+    def loop(self):
+        pass

@@ -1,6 +1,6 @@
 import pygame
 from block import Block
-from fire import Fire
+from fire import *
 
 
 class Level():
@@ -18,9 +18,9 @@ class Level():
         floor.append(Block(0, self.height - block_size * 2, block_size,block_size, "Grass"))
         floor.append(Block(block_size * 3, self.height - block_size * 4, block_size,block_size, "Grass"))
 
-        xpos = block_size * 3
-        ypos = (self.height - block_size * 3 )
-        for i in range(6):
+        xpos = block_size * 11
+        ypos = (self.height - block_size * 4 )
+        for i in range(9):
             floor.append(Block(xpos, ypos, 36,32, "BrownSmallBox"))
             ypos += 32
 
@@ -31,15 +31,38 @@ class Level():
 
         floor.append(Block((block_size * 7), self.height - block_size * 4, 100,32, "BrownBar"))
 
+        floor.append(Block((block_size * 8) -2, self.height - block_size * 3, 100,32, "BrownBar"))
+        floor.append(Block((block_size * 9) -2, self.height - block_size * 3, 100,32, "BrownBar"))
+
+        floor.append(Block((block_size * 10), self.height - block_size * 4, 100,32, "BrownBar"))
+
 
 
         return floor
     
     def loadObsticals(self):
+
+        obj = []
+
         fire = Fire(100, self.height - 96 - 64, 16, 32, "fire")
         fire.on()
 
-        return [fire]
+        obj.append(fire)
+
+        xPos = 96 *5 + 16
+        for i in range(5):
+            spike = Spike(xPos, self.height - 96 * 3 - 32,32,32,"spike")
+            obj.append(spike)
+            xPos += 32
+
+        xPos = 96 *8 + 16
+        for i in range(5):
+            spike = Spike(xPos, self.height - 96 * 3 - 32,32,32,"spike")
+            obj.append(spike)
+            xPos += 32
+
+
+        return obj
     
     def loop(self):
         for obj in self.obsticals:

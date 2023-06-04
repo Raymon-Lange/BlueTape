@@ -2,7 +2,8 @@ import pygame
 
 OBJECTS = {"Grass": pygame.Rect(96, 0, 96, 96),
            "BrownBar": pygame.Rect(190, 0, 100, 32),
-           "BrownSmallBox": pygame.Rect(190, 16, 36, 32)}
+           "BrownSmallBox": pygame.Rect(190, 16, 36, 32),
+           "spike": pygame.Rect(0,0,16,16)}
 
 class Object(pygame.sprite.Sprite):
     def __init__(self, x, y, width, height, name=None):
