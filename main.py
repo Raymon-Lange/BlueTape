@@ -34,8 +34,6 @@ def main(screen):
     level = Level(HEIGHT, WIDTH)
     level.loadLevel()
 
-
-
     while run:
         clock.tick(FPS)
 
