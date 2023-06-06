@@ -1,6 +1,7 @@
 import pygame
 from block import Block
 from fire import *
+from item import Item
 
 
 class Level():
@@ -9,6 +10,7 @@ class Level():
         self.height = screenHeight
         self.levelObjects = self.loadLevel()
         self.obsticals = self.loadObsticals()
+        self.objectives = self.loadObjectives()
 
     def loadLevel(self):
         block_size = 96
@@ -41,7 +43,6 @@ class Level():
         return floor
     
     def loadObsticals(self):
-
         obj = []
 
         fire = Fire(100, self.height - 96 - 64, 16, 32, "fire")
@@ -64,9 +65,23 @@ class Level():
 
         return obj
     
+    def loadObjectives(self):
+        obj  = []
+
+        xPos = 96 *3 + 16
+        for i in range(5):
+            apple = Item(xPos, self.height - 96 - 64,32,32,"spike")
+            obj.append(apple)
+            xPos += 96
+
+        return obj
+    
     def loop(self):
         for obj in self.obsticals:
             obj.loop()
+
+        for obj in self.objectives:
+            obj.loop() 
 
 
     def draw(self, screen, offsetX ):
@@ -74,4 +89,7 @@ class Level():
             block.draw(screen,offsetX)
 
         for obj in self.obsticals:
+            obj.draw(screen, offsetX)
+
+        for obj in self.objectives:
             obj.draw(screen, offsetX)

@@ -71,6 +71,12 @@ def main(screen):
             if obj and obj.name == "spike":
                 player.takeDamage()
 
+        objs = game.handleVerticalCollision(player, level.objectives, player.y_vel)
+
+        for obj in objs:
+            print(obj)
+            level.objectives.remove(obj)
+
 
         #STEP: Draw Games
         game.draw(screen)
