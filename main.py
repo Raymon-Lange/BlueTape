@@ -5,6 +5,7 @@ from os.path import isfile, join
 from game import Game
 from level import Level
 from player import Player
+from item import Item
 
 pygame.init()
 clock = pygame.time.Clock()
@@ -71,12 +72,12 @@ def main(screen):
             if obj and obj.name == "spike":
                 player.takeDamage()
 
-        objs = game.handleVerticalCollision(player, level.objectives, player.y_vel)
+        objs = game.handleVerticalCollision(player, level.objectives, 0)
 
         for obj in objs:
-            print(obj)
+            action = Item(obj.rect.x, obj.rect.y, obj.width, obj.height, "Collected")
+            level.addEffect(action)
             level.objectives.remove(obj)
-
 
         #STEP: Draw Games
         game.draw(screen)
@@ -94,7 +95,6 @@ def main(screen):
     # STEP:Clear up 
     pygame.quit()
     sys.exit()
-3
 
 if __name__ == "__main__":
     main(screen)

@@ -10,13 +10,15 @@ class Item(Object):
         super().__init__(x, y, width, height, name)
         self.apple = Sprite()
         self.apple.loadSpriteSheet("Items", "Fruits", width, height)
-        self.image = self.apple.allSprites["Apple"][0]
+        self.image = self.apple.allSprites[self.name][0]
         self.mask = pygame.mask.from_surface(self.image)
         self.animation_count = 0
+        self.isCollected = False
+        self.finished = False
         self.pointValue = 1
 
     def loop(self):
-        sprites = self.apple.allSprites["Apple"]
+        sprites = self.apple.allSprites[self.name]
         sprite_index = (self.animation_count //
                         self.ANIMATION_DELAY) % len(sprites)
         self.image = sprites[sprite_index]
@@ -27,3 +29,7 @@ class Item(Object):
 
         if self.animation_count // self.ANIMATION_DELAY > len(sprites):
             self.animation_count = 0
+            self.finished = True
+
+    def collected(self):
+        self.isCollected = True

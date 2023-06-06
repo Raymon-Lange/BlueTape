@@ -11,6 +11,7 @@ class Level():
         self.levelObjects = self.loadLevel()
         self.obsticals = self.loadObsticals()
         self.objectives = self.loadObjectives()
+        self.effects = []
 
     def loadLevel(self):
         block_size = 96
@@ -37,8 +38,6 @@ class Level():
         floor.append(Block((block_size * 9) -2, self.height - block_size * 3, 100,32, "BrownBar"))
 
         floor.append(Block((block_size * 10), self.height - block_size * 4, 100,32, "BrownBar"))
-
-
 
         return floor
     
@@ -70,7 +69,7 @@ class Level():
 
         xPos = 96 *3 + 16
         for i in range(5):
-            apple = Item(xPos, self.height - 96 - 64,32,32,"spike")
+            apple = Item(xPos, self.height - 96 - 64,32,32,"Melon")
             obj.append(apple)
             xPos += 96
 
@@ -82,6 +81,11 @@ class Level():
 
         for obj in self.objectives:
             obj.loop() 
+        
+        for obj in self.effects:
+            obj.loop()
+            if obj.finished:
+                self.effects.remove(obj)
 
 
     def draw(self, screen, offsetX ):
@@ -93,3 +97,9 @@ class Level():
 
         for obj in self.objectives:
             obj.draw(screen, offsetX)
+
+        for obj in self.effects:
+            obj.draw(screen, offsetX)
+
+    def addEffect(self, action):
+        self.effects.append(action)
