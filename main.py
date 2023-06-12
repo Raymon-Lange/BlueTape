@@ -83,7 +83,7 @@ def main(screen):
 
         for obj in objs:
             action = Item(obj.rect.x, obj.rect.y, obj.width, obj.height, "Collected")
-            points += 1
+            points += obj.pointValue
             level.addEffect(action)
             level.objectives.remove(obj)
 

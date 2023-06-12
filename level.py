@@ -74,11 +74,17 @@ class Level():
         obj  = []
 
         xPos = 96 *3 + 16
+        yPos = self.height - 96 - 64
         for i in range(5):
-            apple = Item(xPos, self.height - 96 - 64,32,32,"Melon")
+            apple = Item(xPos,yPos ,32,32,"Apple")
             obj.append(apple)
             xPos += 96
 
+        xPos = 96 * 12
+        melon = Item(xPos, yPos, 32,32 ,"Melon")
+        melon.pointValue = 10
+        obj.append(melon)
+        
         return obj
     
     def loop(self):

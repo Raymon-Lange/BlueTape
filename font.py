@@ -7,7 +7,7 @@ class Font():
 
     def __init__(self, path) -> None:
         self.spaceing = 0
-        self.charOrder = [['A','B','C','D','E','F','G','H','I','J'], #0
+        self.charOrder = [['A','B','C','D','E','F','G','H','I','J'], 
                           ['K','L','M','N','O','P','Q','R','S','T'],
                           ['U','V','W','X','Y','Z'],
                           ['0','1','2','3','4','5','6','7','8','9'],
@@ -19,7 +19,6 @@ class Font():
                 surface = pygame.Surface((self.FONT_WIDTH, self.FONT_HEIGHT), pygame.SRCALPHA)
                 rect = pygame.Rect(col * self.FONT_WIDTH, row * self.FONT_HEIGHT,  self.FONT_WIDTH, self.FONT_HEIGHT)
                 surface.blit(fontImg,(0,0), rect)
-                print(self.charOrder[row][col])
                 self.chars[self.charOrder[row][col]]= surface
 
     def draw(self, text , screen, x, y, offset_x, scale):
