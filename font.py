@@ -20,12 +20,13 @@ class Font():
                 rect = pygame.Rect(col * self.FONT_WIDTH, row * self.FONT_HEIGHT,  self.FONT_WIDTH, self.FONT_HEIGHT)
                 surface.blit(fontImg,(0,0), rect)
                 print(self.charOrder[row][col])
-                self.chars[self.charOrder[row][col]]= pygame.transform.scale2x(surface)
+                self.chars[self.charOrder[row][col]]= surface
 
-    def draw(self, text , screen, x, y, offset_x):
+    def draw(self, text , screen, x, y, offset_x, scale):
         for char in text:
             if char != ' ':
-                screen.blit(self.chars[char],( x + offset_x, y) )
+                screen.blit(pygame.transform.scale_by(self.chars[char], scale),( x + offset_x, y) )
+
             offset_x += self.FONT_WIDTH*2 + self.spaceing
             
 

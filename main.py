@@ -100,7 +100,7 @@ def main(screen):
 
         text = str(int(time / 60)) + ":" + str(time % 60)
 
-        whiteFont.draw(text,screen, 96, 96 , 0)
+        whiteFont.draw(text,screen, 96, 96 , 0, 3.5)
 
         pygame.display.update()
 
