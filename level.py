@@ -1,6 +1,6 @@
 import pygame
 from block import Block
-from fire import *
+from traps import *
 from item import Item
 
 
@@ -84,7 +84,7 @@ class Level():
         melon = Item(xPos, yPos, 32,32 ,"Melon")
         melon.pointValue = 10
         obj.append(melon)
-        
+
         return obj
     
     def loop(self):
