@@ -8,6 +8,7 @@ class Game:
         self.gameOver = False
         self.width = 0
         self.height = 0
+        self.hud = self.getHud("assets\Hud\TopHUD.png")
 
     def getBackground(self, name):
         image = pygame.image.load(join("assets", "Background", name))
@@ -20,11 +21,17 @@ class Game:
         
         return tiles, image
     
+    def getHud(self, name):
+        image = pygame.image.load(name)
+        return image
+    
     def draw(self, screen):
         background, image = self.getBackground("Blue.png")
 
         for tile in background:
             screen.blit(image, tile)
+
+        screen.blit(self.hud,(0,0))
 
 
     def handleVerticalCollision(self, player, objects, dy):

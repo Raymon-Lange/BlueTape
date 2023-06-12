@@ -27,7 +27,7 @@ class Font():
             if char != ' ':
                 screen.blit(pygame.transform.scale_by(self.chars[char], scale),( x + offset_x, y) )
 
-            offset_x += self.FONT_WIDTH*2 + self.spaceing
+            offset_x += self.FONT_WIDTH * scale + self.spaceing
             
 
 

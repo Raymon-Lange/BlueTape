@@ -40,6 +40,7 @@ def main(screen):
 
     time = 0
     counter = 0
+    points = 0
 
     while run:
         clock.tick(FPS)
@@ -82,6 +83,7 @@ def main(screen):
 
         for obj in objs:
             action = Item(obj.rect.x, obj.rect.y, obj.width, obj.height, "Collected")
+            points += 1
             level.addEffect(action)
             level.objectives.remove(obj)
 
@@ -100,7 +102,9 @@ def main(screen):
 
         text = str(int(time / 60)) + ":" + str(time % 60)
 
-        whiteFont.draw(text,screen, 96, 96 , 0, 3.5)
+        whiteFont.draw(text,screen, 335, 16 , 0, 4)
+
+        whiteFont.draw(str(points),screen, 675, 16, 0 , 3)
 
         pygame.display.update()
 
