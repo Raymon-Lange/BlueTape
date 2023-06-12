@@ -27,6 +27,12 @@ class Level():
             floor.append(Block(xpos, ypos, 36,32, "BrownSmallBox"))
             ypos += 32
 
+        xpos = block_size * 14
+        ypos = (self.height - block_size * 4 )
+        for i in range(9):
+            floor.append(Block(xpos, ypos, 36,32, "BrownSmallBox"))
+            ypos += 32
+
         floor.append(Block((block_size * 4)-5, self.height - block_size * 4, 100,32, "BrownBar"))
 
         floor.append(Block((block_size * 5) -2, self.height - block_size * 3, 100,32, "BrownBar"))

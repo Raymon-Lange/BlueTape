@@ -6,6 +6,7 @@ from game import Game
 from level import Level
 from player import Player
 from item import Item
+from font import Font
 
 pygame.init()
 clock = pygame.time.Clock()
@@ -34,6 +35,11 @@ def main(screen):
 
     level = Level(HEIGHT, WIDTH)
     level.loadLevel()
+
+    whiteFont = Font("assets\Menu\Text\Text (White) (8x10).png")
+
+    time = 0
+    counter = 0
 
     while run:
         clock.tick(FPS)
@@ -85,6 +91,17 @@ def main(screen):
         level.draw(screen, offset_x)
 
         player.draw(screen,offset_x)
+
+
+        counter +=1
+        if counter == FPS:
+            counter = 0
+            time += 1
+
+        text = str(int(time / 60)) + ":" + str(time % 60)
+
+        whiteFont.draw(text,screen, 96, 96 , 0)
+
         pygame.display.update()
 
         if ((player.rect.right - offset_x >= WIDTH - scroll_area_width) and player.x_vel > 0) or (
