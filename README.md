@@ -16,32 +16,12 @@ To build and run BlueTape, follow the steps outlined below. Please ensure that y
 git clone https://github.com/Raymon-Lange/BlueTape.git
 ```
 
-2. Navigate to the project directory:
-```
-cd BlueTape
-```
-
-3. (Optional) Set up a virtual environment (recommended):
-```
-python3 -m venv venv
-```
-
-4. Activate the virtual environment:
-- For Windows:
-```
-venv\Scripts\activate
-```
-- For macOS/Linux:
-```
-source venv/bin/activate
-```
-
-5. Install the required dependencies:
+2. Install the required dependencies:
 ```
 pip install -r requirements.txt
 ```
 
-6. Run the BlueTape application:
+3. Run the BlueTape application:
 ```
 python main.py
 ```
