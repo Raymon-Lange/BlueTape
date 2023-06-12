@@ -43,7 +43,7 @@ pip install -r requirements.txt
 
 6. Run the BlueTape application:
 ```
-python blue_tape.py
+python main.py
 ```
 
 Executing the last command will launch BlueTape along with a short demo of a platformer game. You'll be able to control the character, run, jump, and collect objects.
