@@ -43,7 +43,7 @@ class Spike(Object):
         self.mask = pygame.mask.from_surface(self.image)
 
     def getBlock(self, width, height, name):
-        path = join("assets", "Traps\Spikes", "idle.png")
+        path = join("assets", "Traps", "Spikes", "idle.png")
         return self.getSurface(width, height, path)
     
     def loop(self):

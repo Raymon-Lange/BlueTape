@@ -8,7 +8,10 @@ class Game:
         self.gameOver = False
         self.width = 0
         self.height = 0
-        self.hud = self.getHud("assets\Hud\TopHUD.png")
+
+        path = os.path.join("assets", "Hud","TopHUD.png")
+
+        self.hud = self.getHud(path)
 
     def getBackground(self, name):
         image = pygame.image.load(join("assets", "Background", name))
