@@ -78,6 +78,10 @@ def main(screen):
                 player.takeDamage()
             if obj and obj.name == "spike":
                 player.takeDamage()
+            if obj and obj.name == "trampoline":
+                player.jump()
+                player.y_vel = -13
+                obj.on()
 
         objs = game.handleVerticalCollision(player, level.objectives, 0)
 

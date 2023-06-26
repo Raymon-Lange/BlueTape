@@ -67,6 +67,17 @@ class Level():
             obj.append(spike)
             xPos += 32
 
+        xPos = 96 * -1
+        yPos = self.height - 96 - 55
+
+        trampoline = Trampoline(xPos, yPos, 28,28,"trampoline")
+        obj.append(trampoline)
+
+
+        xPos = 96 *13 + 16
+        trampoline1 = Trampoline(xPos, yPos, 28,28,"trampoline")
+        obj.append(trampoline1)
+
 
         return obj
     

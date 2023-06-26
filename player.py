@@ -37,7 +37,7 @@ class Player(pygame.sprite.Sprite):
             self.animationCount = 0
 
     def jump(self):
-        self.y_vel = -self.GRAVITY * 8
+        self.y_vel = -self.GRAVITY * 7
         self.animation_count = 0
         self.jumpCount += 1
         if self.jumpCount == 1:

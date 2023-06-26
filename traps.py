@@ -38,8 +38,8 @@ class Fire(Object):
 class Spike(Object):
     def __init__(self, x, y, width, height, name=None):
         super().__init__(x, y, width, height, name)
-        block = self.getBlock(width, height,name)
-        self.image.blit(block, (0, 0))
+        image = self.getBlock(width, height,name)
+        self.image.blit(image, (0, 0))
         self.mask = pygame.mask.from_surface(self.image)
 
     def getBlock(self, width, height, name):
@@ -48,3 +48,38 @@ class Spike(Object):
     
     def loop(self):
         pass
+
+
+class Trampoline(Object):
+    ANIMATION_DELAY = 5
+    #28X28
+    def __init__(self, x, y, width, height, name=None):
+        super().__init__(x, y, width, height, name)
+        
+        self.trampoline = Sprite()
+        self.trampoline.loadSpriteSheet("Traps", "Trampoline", width, height)
+        self.image = self.trampoline.allSprites["Idle"][0]
+        self.mask = pygame.mask.from_surface(self.image)
+        self.animation_count = 0
+        self.animation_name = "Idle"
+
+    def on(self):
+        self.animation_name = "Jump"
+
+    def off(self):
+        self.animation_name = "Idle"
+
+    def loop(self):
+        sprites = self.trampoline.allSprites[self.animation_name]
+        sprite_index = (self.animation_count //
+                        self.ANIMATION_DELAY) % len(sprites)
+        self.image = sprites[sprite_index]
+        self.animation_count += 1
+
+        self.rect = self.image.get_rect(topleft=(self.rect.x, self.rect.y))
+        self.mask = pygame.mask.from_surface(self.image)
+
+        if self.animation_count // self.ANIMATION_DELAY > len(sprites):
+            self.animation_count = 0
+            self.off()
+
