@@ -105,7 +105,7 @@ def main(screen):
             counter = 0
             time += 1
 
-        text = str(int(time / 60)) + ":" + str(time % 60)
+        text = str(int(time / 60)) + ":" + str("{:02d}".format(time % 60))
 
         whiteFont.draw(text,screen, 335, 16 , 0, 4)
 
