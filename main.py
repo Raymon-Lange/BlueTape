@@ -36,7 +36,8 @@ def main(screen):
     level = Level(HEIGHT, WIDTH)
     level.loadLevel()
 
-    whiteFont = Font("assets\Menu\Text\Text (White) (8x10).png")
+    path = join("assets", "Menu", "Text", "Text (White) (8x10).png")
+    whiteFont = Font(path)
 
     time = 0
     counter = 0
