@@ -49,6 +49,7 @@ class Game:
                     player.hitHead()
 
                 collided_objects.append(obj)
+                break
 
         return collided_objects
     

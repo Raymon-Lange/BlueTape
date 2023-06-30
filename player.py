@@ -42,6 +42,13 @@ class Player(pygame.sprite.Sprite):
         self.jumpCount += 1
         if self.jumpCount == 1:
             self.fall_count = 0
+    
+    def jumpWithScale(self, scale):
+        self.y_vel = -self.GRAVITY * scale
+        self.animation_count = 0
+        self.jumpCount += 1
+        if self.jumpCount == 1:
+            self.fall_count = 0
         
     def loop(self, fps):
         self.y_vel += min(1, self.fallCount /fps) * self.GRAVITY

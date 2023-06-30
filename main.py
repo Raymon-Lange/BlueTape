@@ -67,7 +67,6 @@ def main(screen):
             if not hitRight:
                 player.moveRight(PLAYER_VELOCITY)
 
-
         #STEP: Update Pos
         player.loop(FPS)
         level.loop()
@@ -80,8 +79,7 @@ def main(screen):
             if obj and obj.name == "spike":
                 player.takeDamage()
             if obj and obj.name == "trampoline":
-                player.jump()
-                player.y_vel = -13
+                player.jumpWithScale(13)
                 obj.on()
 
         objs = game.handleVerticalCollision(player, level.objectives, 0)
