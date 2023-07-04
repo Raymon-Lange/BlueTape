@@ -135,11 +135,12 @@ class Saw(Object):
         xPos = self.rect.x
         yPos = self.rect.y
 
-        atDest = (xPos == self.dest[self.path] and xPos == self.dest[self.path])
+        atXDest = (xPos == self.dest[0])
+        atYDest = (yPos == self.dest[1])
 
         #STEP: if at location pick a new location
 
-        if atDest:
+        if atXDest and atYDest:
             if self.pathPos == len(self.path)-1:
                 self.pathPos = 0
             else:
@@ -148,9 +149,14 @@ class Saw(Object):
             self.dest = self.path[self.pathPos]
 
         if xPos > self.dest[0]:
-            self.xVel = -2
+            self.xVel = -1
         elif xPos < self.dest[0]:
-            self.xVel = 2
+            self.xVel = 1
+
+        if yPos > self.dest[1]:
+            self.yVel = -1
+        elif yPos < self.dest[1]:
+            self.yVel = 1
 
 
         #STEP: move toward location

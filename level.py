@@ -50,9 +50,13 @@ class Level():
 
         #Left Side
 
-        floor.append(Block((block_size * -4)-5, self.height - block_size * 4, 100,32, "BrownBar"))
+        floor.append(Block((block_size * -4), self.height - block_size * 4, 100,32, "BrownBar"))
 
         floor.append(Block((block_size * -7), self.height - block_size * 4, 100,32, "BrownBar"))
+
+        floor.append(Block((block_size * -9), self.height - block_size * 4, 100,32, "BrownBar"))
+
+        floor.append(Block((block_size * -12), self.height - block_size * 4, 100,32, "BrownBar"))
 
         return floor
     
@@ -90,10 +94,15 @@ class Level():
 
         saw = Saw((block_size * -5) -2, (self.height - block_size * 4) + 32, 38,38, "saw")
         saw.on()
-        path = [( (block_size * -7 )+50 , self.height - block_size * 4),( block_size * -4, self.height - block_size * 4)]
+        path = [[ (block_size * -7 )+50 , (self.height - block_size * 4) + 32] ,[block_size * -4, (self.height - block_size * 4) +32]]
         saw.buildPath(path)
         obj.append(saw)
 
+        saw = Saw((block_size * -10), (self.height - block_size * 6), 38,38, "saw")
+        saw.on()
+        path = [[ (block_size * -10 ) , self.height - block_size * 5],[block_size * -10, self.height - block_size * 3]]
+        saw.buildPath(path)
+        obj.append(saw)
 
         return obj
     
