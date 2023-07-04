@@ -70,7 +70,12 @@ def main(screen):
         #STEP: Update Pos
         player.loop(FPS)
         level.loop()
-        game.handleVerticalCollision(player, level.levelObjects, player.y_vel)
+        objs = game.handleVerticalCollision(player, level.levelObjects, player.y_vel)
+
+        #STEP: Evualted player state based on collison 
+        # a player is on a wall if not landed,  is collided and Xvel != 0
+        
+
         objs = game.handleVerticalCollision(player, level.obsticals, player.y_vel)
 
         for obj in objs:
@@ -79,7 +84,7 @@ def main(screen):
             if obj and obj.name == "spike":
                 player.takeDamage()
             if obj and obj.name == "trampoline":
-                player.jumpWithScale(13)
+                player.jump(13)
                 obj.on()
 
         objs = game.handleVerticalCollision(player, level.objectives, 0)

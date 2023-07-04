@@ -36,14 +36,7 @@ class Player(pygame.sprite.Sprite):
             self.direction = "right"
             self.animationCount = 0
 
-    def jump(self):
-        self.y_vel = -self.GRAVITY * 7
-        self.animation_count = 0
-        self.jumpCount += 1
-        if self.jumpCount == 1:
-            self.fall_count = 0
-    
-    def jumpWithScale(self, scale):
+    def jump(self, scale=7):
         self.y_vel = -self.GRAVITY * scale
         self.animation_count = 0
         self.jumpCount += 1
@@ -73,6 +66,8 @@ class Player(pygame.sprite.Sprite):
         spriteSheet = "idle"
         if self.hit:
             spriteSheet = "hit"
+#        elif self.x_vel == 0 and self.y_vel < 0:
+#            spriteSheet ="wall_jump"
         elif self.y_vel < 0:
             if self.jumpCount == 1:
                 spriteSheet = "jump"
