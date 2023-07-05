@@ -85,7 +85,7 @@ class Trampoline(Object):
 
 
 class Saw(Object):
-    ANIMATION_DELAY = 5
+    ANIMATION_DELAY = 3
     #28X28
     def __init__(self, x, y, width, height, name=None):
         super().__init__(x, y, width, height, name)
