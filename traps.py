@@ -2,6 +2,7 @@ import pygame
 from object import Object
 from os.path import join
 from sprite import Sprite
+from random import randint
 
 class Fire(Object):
     ANIMATION_DELAY = 5
@@ -164,8 +165,9 @@ class Saw(Object):
         self.rect.y += self.yVel
 
 class Platform(Object):
-    ANIMATION_DELAY = 3
-    #28X28
+    ANIMATION_DELAY = 5
+    GRAVITY = 1
+    #32X10
     def __init__(self, x, y, width, height, name=None):
         super().__init__(x, y, width, height, name)
         
@@ -174,11 +176,12 @@ class Platform(Object):
         self.image = self.saw.allSprites["off"][0]
         self.mask = pygame.mask.from_surface(self.image)
         self.animation_count = 0
-        self.animation_name = "on"
-        self.xVel = 0
+        self.animation_name = "off"
         self.yVel = 0
-        self.path = None
-        self.pathPos = 0
+        self.yOrginalLocation = y
+        self.timeBeforeFall = 10
+        self.fallCount = 0
+        self.falling = False
     
     def on(self):
         self.animation_name = "on"
@@ -206,39 +209,14 @@ class Platform(Object):
         self.dest = path[0]
     
     def move(self):
-        #STEP: Check if we have a path 
-        if self.path == None:
-            return 
-
-        #STEP: Check if at the location 
-        xPos = self.rect.x
-        yPos = self.rect.y
-
-        atXDest = (xPos == self.dest[0])
-        atYDest = (yPos == self.dest[1])
-
-        #STEP: if at location pick a new location
-
-        if atXDest and atYDest:
-            if self.pathPos == len(self.path)-1:
-                self.pathPos = 0
+        if self.animation_name == "off":
+            if self.timeBeforeFall <= 0:
+                self.yVel += min(1, self.fallCount /60) * self.GRAVITY
+                self.rect.y += self.yVel
+                self.fallCount += 1
             else:
-                self.pathPos += 1
-
-            self.dest = self.path[self.pathPos]
-
-        if xPos > self.dest[0]:
-            self.xVel = -1
-        elif xPos < self.dest[0]:
-            self.xVel = 1
-
-        if yPos > self.dest[1]:
-            self.yVel = -1
-        elif yPos < self.dest[1]:
-            self.yVel = 1
-
-
-        #STEP: move toward location
-        self.rect.x += self.xVel
-        self.rect.y += self.yVel
+                self.timeBeforeFall = self.timeBeforeFall - 1
+        else:
+            if self.animation_count // self.ANIMATION_DELAY == 0:
+                self.rect.y = self.yOrginalLocation  + randint(-1,1)
 

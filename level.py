@@ -104,6 +104,13 @@ class Level():
         saw.buildPath(path)
         obj.append(saw)
 
+        xPos = 96 * -16
+        for i in range(5):
+            plat = Platform(xPos, self.height - 96 * 3,32,10,"platform")
+            plat.on()
+            obj.append(plat)
+            xPos += 64
+
         return obj
     
     def loadObjectives(self):

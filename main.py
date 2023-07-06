@@ -85,6 +85,9 @@ def main(screen):
                 player.takeDamage()
             if obj and obj.name == "saw":
                 player.takeDamage()
+            if obj and obj.name == "platform":
+                obj.off()
+                
             if obj and obj.name == "trampoline":
                 player.jump(13)
                 obj.on()
