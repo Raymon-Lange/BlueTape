@@ -58,6 +58,8 @@ class Level():
 
         floor.append(Block((block_size * -12), self.height - block_size * 4, 100,32, "BrownBar"))
 
+        floor.append(Block((block_size * -18), self.height - block_size * 4, 100,32, "BrownBar"))
+
         return floor
     
     def loadObsticals(self):
@@ -124,6 +126,19 @@ class Level():
             xPos += 96
 
         xPos = 96 * 12
+        melon = Item(xPos, yPos, 32,32 ,"Melon")
+        melon.pointValue = 10
+        obj.append(melon)
+
+        xPos = 96 * -6 
+        yPos = self.height - (96 * 6)
+        for i in range(5):
+            apple = Item(xPos,yPos ,32,32,"Apple")
+            obj.append(apple)
+            xPos -=  96 * 2
+
+        xPos = 96 * -18
+        yPos = self.height - (96 * 5)
         melon = Item(xPos, yPos, 32,32 ,"Melon")
         melon.pointValue = 10
         obj.append(melon)
