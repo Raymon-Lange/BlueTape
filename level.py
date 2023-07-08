@@ -89,6 +89,10 @@ class Level():
         trampoline = Trampoline(xPos, yPos, 28,28,"trampoline")
         obj.append(trampoline)
 
+        xPos = 96 *13 + 16
+        trampoline1 = Trampoline(xPos, yPos, 28,28,"trampoline")
+        obj.append(trampoline1)
+
         xPos = 96 * 2
         yPos = self.height - 96 -16
 
@@ -99,9 +103,7 @@ class Level():
             obj.append(fan)
 
 
-        xPos = 96 *13 + 16
-        trampoline1 = Trampoline(xPos, yPos, 28,28,"trampoline")
-        obj.append(trampoline1)
+
 
         saw = Saw((block_size * -5) -2, (self.height - block_size * 4) + 32, 38,38, "saw")
         saw.on()

@@ -39,15 +39,15 @@ class Game:
 
     def handleVerticalCollision(self, player, objects, dy):
         collided_objects = []
+
         for obj in objects:
             if pygame.sprite.collide_mask(player, obj):
                 if dy > 0:
                     player.rect.bottom = obj.rect.top
                     player.landed()
                 elif dy < 0:
-                    player.rect.top = obj.rect.bottom
+                    #player.rect.top = obj.rect.bottom
                     player.hitHead()
-
                 collided_objects.append(obj)
                 break
 

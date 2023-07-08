@@ -127,6 +127,11 @@ def main(screen):
                 (player.rect.left - offset_x <= scroll_area_width) and player.x_vel < 0):
             offset_x += player.x_vel
 
+        if player.rect.y > (HEIGHT * 2):
+            player.rect = pygame.Rect(50,50,50,50)
+            offset_x = 0
+            player.y_vel = 0
+
 
     # STEP:Clear up 
     pygame.quit()
