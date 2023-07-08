@@ -89,6 +89,15 @@ class Level():
         trampoline = Trampoline(xPos, yPos, 28,28,"trampoline")
         obj.append(trampoline)
 
+        xPos = 96 * 2
+        yPos = self.height - 96 -16
+
+        for i in range(2):
+            fan = Fan(xPos, yPos, 24,8,"fan")
+            fan.on()
+            xPos += 48
+            obj.append(fan)
+
 
         xPos = 96 *13 + 16
         trampoline1 = Trampoline(xPos, yPos, 28,28,"trampoline")

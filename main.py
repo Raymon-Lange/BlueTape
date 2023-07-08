@@ -87,10 +87,12 @@ def main(screen):
                 player.takeDamage()
             if obj and obj.name == "platform":
                 obj.off()
-                
             if obj and obj.name == "trampoline":
                 player.jump(13)
                 obj.on()
+            if obj and obj.name == "fan":
+                player.isFly = True
+                player.jump(4)
 
         objs = game.handleVerticalCollision(player, level.objectives, 0)
 
