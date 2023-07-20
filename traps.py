@@ -10,7 +10,8 @@ class Fire(Object):
     def __init__(self, xPos, yPos, width, height , name) -> None:
         super().__init__(xPos, yPos, width, height, name)
         self.fire = Sprite()
-        self.fire.loadSpriteSheet("Traps", "Fire", width, height)
+        path = join("assets","Traps", "Fire")
+        self.fire.loadSpriteSheet(path, width, height)
         self.image = self.fire.allSprites["off"][0]
         self.mask = pygame.mask.from_surface(self.image)
         self.animation_count = 0
@@ -58,7 +59,8 @@ class Trampoline(Object):
         super().__init__(x, y, width, height, name)
         
         self.trampoline = Sprite()
-        self.trampoline.loadSpriteSheet("Traps", "Trampoline", width, height)
+        path = join("assets","Traps", "Trampoline")
+        self.trampoline.loadSpriteSheet(path, width, height)
         self.image = self.trampoline.allSprites["Idle"][0]
         self.mask = pygame.mask.from_surface(self.image)
         self.animation_count = 0
@@ -92,7 +94,8 @@ class Saw(Object):
         super().__init__(x, y, width, height, name)
         
         self.saw = Sprite()
-        self.saw.loadSpriteSheet("Traps", "Saw", width, height)
+        path = join("assets","Traps", "Saw")
+        self.saw.loadSpriteSheet(path, width, height)
         self.image = self.saw.allSprites["off"][0]
         self.mask = pygame.mask.from_surface(self.image)
         self.animation_count = 0
@@ -172,7 +175,8 @@ class Platform(Object):
         super().__init__(x, y, width, height, name)
         
         self.saw = Sprite()
-        self.saw.loadSpriteSheet("Traps", "Falling Platforms", width, height)
+        path = join("assets","Traps", "Falling Platforms")
+        self.saw.loadSpriteSheet(path, width, height)
         self.image = self.saw.allSprites["off"][0]
         self.mask = pygame.mask.from_surface(self.image)
         self.animation_count = 0
@@ -227,7 +231,8 @@ class Fan(Object):
         super().__init__(x, y, width, height, name)
         
         self.trampoline = Sprite()
-        self.trampoline.loadSpriteSheet("Traps", "Fan", width, height)
+        path = join("assets", "Traps", "Fan")
+        self.trampoline.loadSpriteSheet(path, width, height)
         self.image = self.trampoline.allSprites["Off"][0]
         self.mask = pygame.mask.from_surface(self.image)
         self.animation_count = 0

@@ -30,7 +30,8 @@ def main(screen):
     game.height = HEIGHT
 
     player = Player(50,50,50,50)
-    player.loadSprite("MainCharacters", "NinjaFrog", 32, 32, True)
+    path = join("assets", "MainCharacters", "NinjaFrog")
+    player.loadSprite(path, 32, 32, True)
     player.loop(FPS)
 
     level = Level(HEIGHT, WIDTH)

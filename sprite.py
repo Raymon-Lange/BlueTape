@@ -10,8 +10,7 @@ class Sprite():
     def flip(self, sprites):
         return [pygame.transform.flip(sprite, True, False) for sprite in sprites]
     
-    def loadSpriteSheet(self, dir1, dir2, width, height, direction=False):
-        path = join("assets", dir1, dir2)
+    def loadSpriteSheet(self, path, width, height, direction=False):
         images = [f for f in listdir(path) if isfile(join(path, f))]
 
         for image in images: 

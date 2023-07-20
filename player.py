@@ -64,14 +64,14 @@ class Player(pygame.sprite.Sprite):
     def draw(self, screen, offset_x):
         screen.blit(self.sprite, (self.rect.x - offset_x, self.rect.y))
 
-    def loadSprite(self,dir1, dir2, width, height, direction = False):
-        self.sprites.loadSpriteSheet(dir1, dir2, width, height, direction)
+    def loadSprite(self,path, width, height, direction = False):
+        self.sprites.loadSpriteSheet(path, width, height, direction)
 
     def updateSprite(self):
         spriteSheet = "idle"
         if self.hit:
             spriteSheet = "hit"
-#        elif self.x_vel == 0 and self.y_vel < 0:
+#        elif self.x_vel == 0 and self.y_vel > 0:
 #            spriteSheet ="wall_jump"
         elif self.y_vel < 0:
             if self.jumpCount == 1:
