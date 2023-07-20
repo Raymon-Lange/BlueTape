@@ -1,7 +1,7 @@
 import pygame
 from block import Block
 from traps import *
-from item import Item
+from item import Item, Box
 
 
 class Level():
@@ -123,6 +123,14 @@ class Level():
             plat.on()
             obj.append(plat)
             xPos += 64
+
+        xPos = 96 * -2
+        yPos = 320
+        box = Box(xPos, yPos, 28,24,"Box1")
+        obj.append(box)
+
+        box = Box(xPos - 40 , yPos, 28,24,"Box1")
+        obj.append(box)
 
         return obj
     

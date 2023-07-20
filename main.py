@@ -76,7 +76,6 @@ def main(screen):
         #STEP: Evualted player state based on collison 
         # a player is on a wall if not landed,  is collided and Xvel != 0
         
-
         objs = game.handleVerticalCollision(player, level.obsticals, player.y_vel)
 
         for obj in objs:
@@ -94,15 +93,27 @@ def main(screen):
             if obj and obj.name == "fan":
                 player.isFly = True
                 player.jump(4)
+            if obj and obj.name == "Box1":
+                if player.y_vel > 0:
+                    actions = obj.hit()
+                    level.obsticals.remove(obj)
+
+                    for action in actions:
+                        level.addEffect(action)
+                else:
+                    player.rect.bottom = obj.rect.top +5
+                    player.landed()
 
         objs = game.handleVerticalCollision(player, level.objectives, 0)
 
         for obj in objs:
-            action = Item(obj.rect.x, obj.rect.y, obj.width, obj.height, "Collected")
-            points += obj.pointValue
-            level.addEffect(action)
-            level.objectives.remove(obj)
+                action = Item(obj.rect.x, obj.rect.y, obj.width, obj.height, "Collected")
+                points += obj.pointValue
+                level.addEffect(action)
+                level.objectives.remove(obj)
+   
 
+        
         #STEP: Draw Games
         game.draw(screen)
 
