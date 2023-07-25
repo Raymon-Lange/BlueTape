@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.10" tiledversion="1.10.1" name="Traps" tilewidth="32" tileheight="32" tilecount="7" columns="0">
+<tileset version="1.10" tiledversion="1.10.1" name="Traps" tilewidth="32" tileheight="32" tilecount="8" columns="0">
  <grid orientation="orthogonal" width="1" height="1"/>
  <tile id="0">
   <image width="16" height="16" source="../../assets/Traps/Spikes/Idle.png"/>
@@ -21,5 +21,8 @@
  </tile>
  <tile id="6">
   <image width="32" height="8" source="../../assets/Traps/Platforms/Grey Off.png"/>
+ </tile>
+ <tile id="7">
+  <image width="28" height="24" source="../../assets/Items/Boxes/Box1/Idle.png"/>
  </tile>
 </tileset>

@@ -3,7 +3,7 @@ import pygame
 from os import listdir
 from os.path import isfile, join
 from game import Game
-from level import Level
+from titledLevel import Level
 from player import Player
 from item import Item
 from font import Font
@@ -16,6 +16,12 @@ BG_COLOR = (255,255,255)
 WIDTH, HEIGHT = 800, 700
 FPS = 80
 PLAYER_VELOCITY = 4
+
+level_0 = {
+		'terrain': 'levels/levels/0/level_0_terrain.csv',
+		'fruits': 'levels/levels/0/level_0_fruits.csv',
+		'player': 'levels/levels/0/level_0_player.csv',
+		'traps': 'levels/levels/0/level_0_traps.csv'}
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 
@@ -34,8 +40,7 @@ def main(screen):
     player.loadSprite(path, 32, 32, True)
     player.loop(FPS)
 
-    level = Level(HEIGHT, WIDTH)
-    level.loadLevel()
+    level = Level(level_0, HEIGHT, WIDTH)
 
     path = join("assets", "Menu", "Text", "Text (White) (8x10).png")
     whiteFont = Font(path)
@@ -60,23 +65,23 @@ def main(screen):
         keys = pygame.key.get_pressed()
 
         if keys[pygame.K_a]:
-            hitLeft = game.collide(player, level.levelObjects, -PLAYER_VELOCITY * 2)
+            hitLeft = game.collide(player, level.terrain_sprites, -PLAYER_VELOCITY * 2)
             if not hitLeft:
                 player.moveLeft(PLAYER_VELOCITY)
         if keys[pygame.K_d]:
-            hitRight = game.collide(player, level.levelObjects, PLAYER_VELOCITY * 2)
+            hitRight = game.collide(player, level.terrain_sprites, PLAYER_VELOCITY * 2)
             if not hitRight:
                 player.moveRight(PLAYER_VELOCITY)
 
         #STEP: Update Pos
         player.loop(FPS)
         level.loop()
-        objs = game.handleVerticalCollision(player, level.levelObjects, player.y_vel)
+        objs = game.handleVerticalCollision(player, level.terrain_sprites, player.y_vel)
 
         #STEP: Evualted player state based on collison 
         # a player is on a wall if not landed,  is collided and Xvel != 0
         
-        objs = game.handleVerticalCollision(player, level.obsticals, player.y_vel)
+        objs = game.handleVerticalCollision(player, level.trap_sprites, player.y_vel)
 
         for obj in objs:
             if obj and obj.name == "fire":
@@ -96,7 +101,7 @@ def main(screen):
             if obj and obj.name == "Box1":
                 if player.y_vel > 0:
                     actions = obj.hit()
-                    level.obsticals.remove(obj)
+                    level.trap_sprites.remove(obj)
 
                     for action in actions:
                         level.addEffect(action)
@@ -104,13 +109,13 @@ def main(screen):
                     player.rect.bottom = obj.rect.top +5
                     player.landed()
 
-        objs = game.handleVerticalCollision(player, level.objectives, 0)
+        objs = game.handleVerticalCollision(player, level.fruit_sprites, 0)
 
         for obj in objs:
                 action = Item(obj.rect.x, obj.rect.y, obj.width, obj.height, "Collected")
                 points += obj.pointValue
                 level.addEffect(action)
-                level.objectives.remove(obj)
+                level.fruit_sprites.remove(obj)
    
 
         

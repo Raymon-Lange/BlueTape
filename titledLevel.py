@@ -3,7 +3,7 @@ from csv import reader
 
 from os import walk
 from os.path import join
-from item import Item
+from item import Item, Box
 from traps import *
 
 class Tile(pygame.sprite.Sprite):
@@ -21,7 +21,8 @@ class Tile(pygame.sprite.Sprite):
 class StaticTile(Tile):
 	def __init__(self,size,x,y,surface):
 		super().__init__(size,x,y)
-		self.image = surface 
+		self.image = surface
+        
 
 class Level:
 
@@ -29,6 +30,7 @@ class Level:
         self.width = screenWidth
         self.height = screenHeight
         self.tile_size = 16
+        self.effects = []
 
         # terrain setup
         terrain_layout = self.import_csv_layout(level_data['terrain'])
@@ -101,13 +103,17 @@ class Level:
 
                     if type == 'traps':
                         if val == "0": sprite = Spike(x,y,32,32,"spike")
-                        if val == "1": sprite = Item(x,y-16,32,32,"Bananas")
-                        if val == "2": sprite = Item(x,y-16,32,32,"Cherries")
-                        if val == "3": sprite = Item(x,y-16,32,32,"Kiwi")
-                        if val == "4": sprite = Fan(x, y+8, 24,8,"fan")
+                        if val == "1": sprite = Trampoline(x, y-8, 28,28,"trampoline")
+                        if val == "2": sprite = Fire(x, y, 16, 32, "fire")
+                        if val == "3": 
+                            sprite = Platform(x, y,32,10,"platform")
+                            sprite.on()
+                        if val == "4": 
+                            sprite = Fan(x, y+8, 24,8,"fan")
+                            sprite.on()
                         if val == "5": sprite = Item(x,y-16,32,32,"Orange")
                         if val == "6": sprite = Item(x,y-16,32,32,"Pineapple")
-                        if val == "7": sprite = Item(x,y-16,32,32,"Strawberry")
+                        if val == "7": sprite = Box(x , y, 28,24,"Box1")
                     
                     sprite_group.add(sprite)
 		
@@ -122,3 +128,22 @@ class Level:
 
         for block in self.trap_sprites:
             block.draw(screen, offsetX)
+        
+        for obj in self.effects:
+            obj.draw(screen, offsetX)
+
+
+    def loop(self):
+        for obj in self.trap_sprites:
+            obj.loop()
+
+        for obj in self.fruit_sprites:
+            obj.loop() 
+        
+        for obj in self.effects:
+            obj.loop()
+            if obj.finished:
+                self.effects.remove(obj)
+
+    def addEffect(self, action):
+        self.effects.append(action)
