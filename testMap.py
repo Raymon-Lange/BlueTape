@@ -9,7 +9,8 @@ screen_width = 600
 level_0 = {
 		'terrain': 'levels/levels/0/level_0_terrain.csv',
 		'fruits': 'levels/levels/0/level_0_fruits.csv',
-		'player': 'levels/levels/0/level_0_player.csv'}
+		'player': 'levels/levels/0/level_0_player.csv',
+		'traps': 'levels/levels/0/level_0_traps.csv'}
 
 # Pygame setup
 pygame.init()

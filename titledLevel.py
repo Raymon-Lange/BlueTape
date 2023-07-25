@@ -4,6 +4,7 @@ from csv import reader
 from os import walk
 from os.path import join
 from item import Item
+from traps import *
 
 class Tile(pygame.sprite.Sprite):
     def __init__(self,size,x,y):
@@ -36,6 +37,10 @@ class Level:
         # Fruits setup
         fruit_layout = self.import_csv_layout(level_data['fruits'])
         self.fruit_sprites = self.create_tile_group(fruit_layout,'fruits')
+
+        #Traps setup
+        trap_layout = self.import_csv_layout(level_data['traps'])
+        self.trap_sprites = self.create_tile_group(trap_layout,'traps')
 
     def import_folder(self, path):
         surface_list = []
@@ -85,7 +90,24 @@ class Level:
                         sprite = StaticTile(self.tile_size,x,y,tile_surface)
 
                     if type == 'fruits':
-                        sprite = Item(x,y-16,32,32,"Apple")
+                        if val == "0": sprite = Item(x,y-16,32,32,"Apple")
+                        if val == "1": sprite = Item(x,y-16,32,32,"Bananas")
+                        if val == "2": sprite = Item(x,y-16,32,32,"Cherries")
+                        if val == "3": sprite = Item(x,y-16,32,32,"Kiwi")
+                        if val == "4": sprite = Item(x,y-16,32,32,"Melon")
+                        if val == "5": sprite = Item(x,y-16,32,32,"Orange")
+                        if val == "6": sprite = Item(x,y-16,32,32,"Pineapple")
+                        if val == "7": sprite = Item(x,y-16,32,32,"Strawberry")
+
+                    if type == 'traps':
+                        if val == "0": sprite = Spike(x,y,32,32,"spike")
+                        if val == "1": sprite = Item(x,y-16,32,32,"Bananas")
+                        if val == "2": sprite = Item(x,y-16,32,32,"Cherries")
+                        if val == "3": sprite = Item(x,y-16,32,32,"Kiwi")
+                        if val == "4": sprite = Fan(x, y+8, 24,8,"fan")
+                        if val == "5": sprite = Item(x,y-16,32,32,"Orange")
+                        if val == "6": sprite = Item(x,y-16,32,32,"Pineapple")
+                        if val == "7": sprite = Item(x,y-16,32,32,"Strawberry")
                     
                     sprite_group.add(sprite)
 		
@@ -97,3 +119,6 @@ class Level:
 
         for block in self.fruit_sprites:
             block.draw(screen,offsetX)
+
+        for block in self.trap_sprites:
+            block.draw(screen, offsetX)

@@ -22,4 +22,6 @@ class Object(pygame.sprite.Sprite):
         surface = pygame.Surface((width, height), pygame.SRCALPHA, 32)
         rect = OBJECTS[self.name]
         surface.blit(image, (0, 0), rect)
-        return pygame.transform.scale2x(surface)
+        #return pygame.transform.scale2x(surface)
+        return pygame.transform.scale_by(surface, 1)
+       

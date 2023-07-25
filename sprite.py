@@ -21,8 +21,8 @@ class Sprite():
                 surface = pygame.Surface((width, height), pygame.SRCALPHA, 32)
                 rect = pygame.Rect(i * width, 0, width, height)
                 surface.blit(spriteSheet,(0,0), rect)
-                sprites.append(pygame.transform.scale2x(surface))
-                #sprites.append(pygame.transform.scale_by(surface, 1))
+                #sprites.append(pygame.transform.scale2x(surface))
+                sprites.append(pygame.transform.scale_by(surface, 1))
         
             if direction:
                 self.allSprites[image.replace(".png", "") + "_right"] = sprites
