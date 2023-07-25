@@ -41,10 +41,10 @@ class Box(Object):
     FPS = 60
     #Hit Size 28 X 24
 
-    def __init__(self, x, y, width, height, name=None):
+    def __init__(self, x, y, width, height, name="Box1"):
         super().__init__(x, y, width, height, name)
         self.item = Sprite()
-        path = join("assets", "Items", "Boxes" ,"Box1")
+        path = join("assets", "Items", "Boxes" ,name)
         self.item.loadSpriteSheet(path, width, height)
         self.image = self.item.allSprites["Idle"][0]
         self.mask = pygame.mask.from_surface(self.image)

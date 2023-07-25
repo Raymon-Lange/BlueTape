@@ -98,7 +98,7 @@ def main(screen):
             if obj and obj.name == "fan":
                 player.isFly = True
                 player.jump(4)
-            if obj and obj.name == "Box1":
+            if obj and (obj.name == "Box1" or obj.name == "Box2" or obj.name == "Box3"):
                 if player.y_vel > 0:
                     actions = obj.hit()
                     level.trap_sprites.remove(obj)

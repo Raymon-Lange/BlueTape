@@ -114,6 +114,8 @@ class Level:
                         if val == "5": sprite = Item(x,y-16,32,32,"Orange")
                         if val == "6": sprite = Item(x,y-16,32,32,"Pineapple")
                         if val == "7": sprite = Box(x , y, 28,24,"Box1")
+                        if val == "8": sprite = Box(x , y, 28,24,"Box2")
+                        if val == "9": sprite = Box(x , y, 28,24,"Box3")
                     
                     sprite_group.add(sprite)
 		
