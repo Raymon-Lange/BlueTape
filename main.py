@@ -13,15 +13,21 @@ clock = pygame.time.Clock()
 pygame.display.set_caption("BlueTape")
 
 BG_COLOR = (255,255,255)
-WIDTH, HEIGHT = 800, 700
+WIDTH, HEIGHT = 800, 720
 FPS = 80
 PLAYER_VELOCITY = 4
 
 level_0 = {
-		'terrain': 'levels/levels/0/level_0_terrain.csv',
-		'fruits': 'levels/levels/0/level_0_fruits.csv',
-		'player': 'levels/levels/0/level_0_player.csv',
-		'traps': 'levels/levels/0/level_0_traps.csv'}
+		'terrain': 'levels/levels/0/level_0__terrain.csv',
+		'fruits': 'levels/levels/0/level_0__fruits.csv',
+		'player': 'levels/levels/0/level_0__player.csv',
+		'traps': 'levels/levels/0/level_0__traps.csv'}
+
+level_1 = {
+		'terrain': 'levels/levels/1/level_1_terrain.csv',
+		'fruits': 'levels/levels/1/level_1_fruits.csv',
+		'player': 'levels/levels/1/level_1_player.csv',
+		'traps': 'levels/levels/1/level_1_traps.csv'}
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 
@@ -98,7 +104,7 @@ def main(screen):
             if obj and obj.name == "fan":
                 player.isFly = True
                 player.jump(4)
-            if obj and (obj.name == "Box1" or obj.name == "Box2" or obj.name == "Box3"):
+            if obj and obj.name == "Box1":
                 if player.y_vel > 0:
                     actions = obj.hit()
                     level.trap_sprites.remove(obj)
